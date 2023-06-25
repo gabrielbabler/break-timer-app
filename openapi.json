@@ -1,0 +1,249 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Swagger Break-Timer",
+    "description": "This project has as a main goal to learn kotlin and its functionaties. It's an API which will work like a POMODORO timer. You can set the frequency of work, time break length and if you want to receive a whatsapp message to notify you.",
+    "version": "1.0.0"
+  },
+  "externalDocs": {
+    "description": "Find out more about the API",
+    "url": "https://github.com/gabrielbabler/break-timer-app"
+  },
+  "tags": [
+    {
+      "name": "break-timer",
+      "description": "Operations about break-timer"
+    }
+  ],
+  "paths": {
+    "/break-timer": {
+      "post": {
+        "tags": [
+          "break-timer"
+        ],
+        "summary": "Create a new break-timer",
+        "description": "Create a new break-timer by user inputs",
+        "requestBody": {
+          "description": "User inputs to have a custom break-timer",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BreakTimer"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/break-timer/{id}/counter/start": {
+      "post": {
+        "tags": [
+          "break-timer"
+        ],
+        "summary": "Start the break-timer",
+        "description": "Start break-timer with the user inputs",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "break-timer id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Accepted"
+          }
+        }
+      }
+    },
+    "/break-timer/counter/callback": {
+      "post": {
+        "tags": [
+          "break-timer"
+        ],
+        "summary": "Notify the result of the counter",
+        "description": "Notify the result of the counter",
+        "requestBody": {
+          "description": "User inputs to have a custom counter",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Callback"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/break-timer/break/callback": {
+      "post": {
+        "tags": [
+          "break-timer"
+        ],
+        "summary": "Notify the result of the break-timer",
+        "description": "Notify the result of the break-timer",
+        "requestBody": {
+          "description": "User inputs to have a custom break-timer",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Callback"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/break-timer/{id}/counter/stop": {
+      "post": {
+        "tags": [
+          "break-timer"
+        ],
+        "summary": "Notify the result of the break-timer",
+        "description": "Notify the result of the break-timer",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "break-timer id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Accepted"
+          }
+        }
+      }
+    },
+    "/break-timer/{id}/break/stop": {
+      "post": {
+        "tags": [
+          "break-timer"
+        ],
+        "summary": "Notify the result of the break-timer",
+        "description": "Notify the result of the break-timer",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "break-timer id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Accepted"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BreakTimer": {
+        "type": "object",
+        "properties": {
+          "break_lenght": {
+            "type": "integer",
+            "format": "int64",
+            "example": 10
+          },
+          "frequency": {
+            "type": "integer",
+            "format": "int64",
+            "example": 60
+          },
+          "cellphone": {
+            "type": "string",
+            "example": 19993939393
+          }
+        }
+      },
+      "BadRequest": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/BadRequestObject"
+        }
+      },
+      "BadRequestObject": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "The field {} is required"
+          }
+        }
+      },
+      "Callback": {
+        "type": "object",
+        "properties": {
+          "finished": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "BreakTimer": {
+        "description": "Break-timer object with the user inputs",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BreakTimer"
+            }
+          }
+        }
+      },
+      "BreakTimerCallback": {
+        "description": "Break-timer object with the user inputs",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BreakTimer"
+            }
+          }
+        }
+      }
+    }
+  }
+}
